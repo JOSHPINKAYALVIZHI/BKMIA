@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motor Control</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+            background: black;
+            color: white;
+        }
+        .container {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            border: 2px solid white;
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        .sensor {
+            font-size: 20px;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+        .toggle-btn {
+            background: red;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .toggle-btn.on {
+            background: green;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Motor Control</h2>
+
+    <div class="container">
+        <button class="toggle-btn" id="motor-toggle" onclick="toggleMotor()">Turn ON</button>
+    </div>
+
+    <script>
+        let motorOn = false;
+
+        function toggleMotor() {
+            motorOn = !motorOn;
+            let toggleBtn = document.getElementById("motor-toggle");
+
+            if (motorOn) {
+                toggleBtn.innerText = "Turn OFF";
+                toggleBtn.classList.add("on");
+            } else {
+                toggleBtn.innerText = "Turn ON";
+                toggleBtn.classList.remove("on");
+            }
+
+            fetch('/toggle-pump'); // Send request to backend
+        }
+    </script>
+
+</body>
+</html>
